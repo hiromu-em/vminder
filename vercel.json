@@ -13,7 +13,7 @@
       {"source":"/logout", "destination":"/api/logout.php"},
       {"source":"/register", "destination":"/api/register.php"},
       {"source":"/sending-failure", "destination":"/api/error/sending-failure.html"},
-      {"source":"/sending-verify", "destination":"/api/certification/sending-verify.html"},
+      {"source":"/sending-verify", "destination":"/certification/sending-verify.html"},
       {
         "source":"/authenticating",
         "has":[
