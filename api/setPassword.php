@@ -8,6 +8,11 @@ require __DIR__ . '/Validation.php';
 require __DIR__ . '/error/ErrorMail.php';
 require __DIR__ . '/../vendor/autoload.php';
 
+$client = new Client($_ENV['REDIS_URL'], ['prefix' => 'user:']);
+$handler = new Handler($client, ['gc_maxlifetime' => 86400]);
+$handler->register();
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     try {
@@ -67,11 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = databaseConnection()->prepare('SELECT id FROM users WHERE email = ?');
                 $stmt->execute([$email]);
                 $userId = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                $client = new Client($_ENV['REDIS_URL'], ['prefix' => 'user:']);
-                $handler = new Handler($client, ['gc_maxlifetime' => 86400]);
-                $handler->register();
-                session_start();
 
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $passwordHash;
