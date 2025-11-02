@@ -69,28 +69,25 @@ h1 a {
   color: #1f1f1f;
   cursor: pointer;
   font-family: 'Roboto', arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   height: 40px;
-  letter-spacing: 0.25px;
   outline: none;
   overflow: hidden;
-  padding: 0 12px;
+  padding: 0 45px;
   position: relative;
   text-align: center;
-  -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
-  transition: background-color .218s, border-color .218s, box-shadow .218s;
   vertical-align: middle;
   white-space: nowrap;
   width: auto;
   max-width: 400px;
   min-width: min-content;
+  transition: 0.3s;
 }
 
 .gsi-material-button .gsi-material-button-icon {
   height: 20px;
-  margin-right: 12px;
   min-width: 20px;
-  width: 20px;
+  width: 22px;
 }
 
 .gsi-material-button .gsi-material-button-content-wrapper {
@@ -110,11 +107,12 @@ h1 a {
 .gsi-material-button .gsi-material-button-contents {
   -webkit-flex-grow: 1;
   flex-grow: 1;
-  font-family: 'Roboto', arial, sans-serif;
-  font-weight: 500;
+  font-family: none;
+  font-weight: 400;
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: top;
+  letter-spacing: 1px;
 }
 
 .gsi-material-button .gsi-material-button-state {
@@ -142,20 +140,7 @@ h1 a {
   opacity: 38%;
 }
 
-.gsi-material-button:not(:disabled):active .gsi-material-button-state,
-.gsi-material-button:not(:disabled):focus .gsi-material-button-state {
-  background-color: #303030;
-  opacity: 12%;
-}
-
 .gsi-material-button:not(:disabled):hover {
-  background-color: #E0F7FF;
-  border-color: #27C7FF;
-  -webkit-box-shadow: 0 1px 3px rgba(39, 199, 255, 0.3);
-  box-shadow: 0 1px 3px rgba(39, 199, 255, 0.3);
-}
-
-.gsi-material-button:not(:disabled):hover .gsi-material-button-state {
-  background-color: #303030;
-  opacity: 8%;
+  background-color: #d4eaff;
+  transition: 0.3s;
 }
