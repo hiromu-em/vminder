@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $stmt->execute([$email]);
 
             if ($userDateRow = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                if (password_verify($password, $userDateRow['password_hash'])) {
+                if (isset($userDateRow['password_hash']) && password_verify($password, $userDateRow['password_hash'])) {
 
                     $client = new Client($_ENV['REDIS_URL'], ['prefix' => 'user:']);
                     $handler = new Handler($client, ['gc_maxlifetime' => 86400]);
