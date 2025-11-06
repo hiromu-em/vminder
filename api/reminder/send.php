@@ -29,7 +29,7 @@ try {
     $mail->Password = $_ENV['GMAIL_PASSWORD'];
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
-    $mail->setFrom($_ENV['GMAIL_USERNAME'], "Vminder-VverseHub-");
+    $mail->setFrom($_ENV['GMAIL_USERNAME'], "vminder");
     $mail->isHTML(true);
 
     $mail->DKIM_domain = 'gmail.com';
