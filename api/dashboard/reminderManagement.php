@@ -15,9 +15,6 @@ session_set_cookie_params([
     'httponly' => true
 ]);
 
-// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
-// $dotenv->load();
-
 $client = new Client($_ENV['REDIS_URL'], ['prefix' => 'user:']);
 $handler = new Handler($client, ['gc_maxlifetime' => 86400]);
 $handler->register();
@@ -73,7 +70,7 @@ $_SESSION['registeredMembers'] = $registeredMembers;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($_SESSION['registeredMembers']) && empty($_POST['selected_members'])) {
-        $error = 'メンバーを選択してください';
+        $fadeOutAndRemoveText = 'メンバーを選択してください';
     }
 
     if (empty($_POST['selected_members']) && !empty($_SESSION['registeredMembers'])) {
@@ -102,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $userDate->insertRegisterMembersId($reminderRegister);
-            $registrationComplete = '登録しました。';
+            $fadeOutAndRemoveText = '登録しました。';
         }
 
         $registeredMembers = $userDate->getRegisterMembersId();
@@ -129,18 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </header>
     <div class="main-content-wrapper">
-        <?php if (!empty($error)): ?>
-            <div class="error-message-container">
-                <div class="error-message">
-                    <p><?php echo $error; ?></p>
-                </div>
-            </div>
-        <?php endif; ?>
-        <?php if (!empty($registrationComplete)): ?>
-            <div class="registration-complete-container">
-                <div class="complete-message">
-                    <p><?php echo $registrationComplete; ?></p>
-                </div>
+        <?php if (!empty($fadeOutAndRemoveText)): ?>
+            <div class="fade-out-remove-container">
+                <p><?php echo $fadeOutAndRemoveText; ?></p>
             </div>
         <?php endif; ?>
             <div class="top-bak-container">

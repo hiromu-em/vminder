@@ -8,8 +8,8 @@ require __DIR__ . '/Validation.php';
 require __DIR__ . '/error/ErrorMail.php';
 require __DIR__ . '/../vendor/autoload.php';
 
-// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-// $dotenv->load();
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 
 if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     $_SESSION['email'] = $email;
                     $_SESSION['password'] = $userDateRow['password_hash'];
 
-                    header("Location: /dashboard");
+                    header("Location: dashboard/reminderManagement.php");
                     exit;
                 } else {
 

@@ -13,9 +13,8 @@ const topButton = document.querySelector('.top-bak-container button');
 const resetButton = document.getElementById('reset-all-button');
 const groupContainer = document.querySelector('.group-container');
 const mainContentWrapper = document.querySelector('.main-content-wrapper');
-const errorContainer = document.querySelector('.error-message-container');
+const fadeOutRemoveContainer = document.querySelector('.fade-out-remove-container');
 const memberSearch = document.querySelector('.member-search');
-const registrationComplete = document.querySelector('.registration-complete-container');
 
 const sideObject = new sidePanel.ReminderPanel();
 const slidebarMediaQuery = window.matchMedia(SLIDEBAR_BREAKPOINT);
@@ -43,75 +42,27 @@ document.body.addEventListener('click', (e) => {
     }
 });
 
-function scrollEvent(e) {
+const groupOffsets = [
+    { value: 'hololive', text: 'ホロライブ' },
+    { value: 'holostars', text: 'ホロスターズ' },
+    { value: 'nizisanzi', text: 'にじさんじ' },
+    { value: 'vspo', text: 'ぶいすぽっ！' }
+];
 
-    if (e.target.className === 'pull-down-list') {
-        const selectedValue = e.target.value;
-
-        switch (selectedValue) {
-            case 'hololive':
-                window.scrollTo({
-                    top: groupTitle.item(0).offsetTop - 145,
-                    behavior: 'instant'
-                });
-                break;
-
-            case 'holostars':
-                window.scrollTo({
-                    top: groupTitle.item(1).offsetTop - 145,
-                    behavior: 'instant'
-                });
-                break;
-
-            case 'nizisanzi':
-                window.scrollTo({
-                    top: groupTitle.item(2).offsetTop - 145,
-                    behavior: 'instant'
-                });
-                break;
-
-            case 'vspo':
-                window.scrollTo({
-                    top: groupTitle.item(3).offsetTop - 145,
-                    behavior: 'instant'
-                });
-                break;
-
-            default:
-                break;
-        }
-    } else {
-
-        if (e.target.textContent === 'ホロライブ') {
-
-            window.scrollTo({
-                top: groupTitle.item(0).offsetTop - 75,
-                behavior: 'instant'
-            });
-
-        } else if (e.target.textContent === 'ホロスターズ') {
-
-            window.scrollTo({
-                top: groupTitle.item(1).offsetTop - 75,
-                behavior: 'instant'
-            });
-
-        } else if (e.target.textContent === 'にじさんじ') {
-
-            window.scrollTo({
-                top: groupTitle.item(2).offsetTop - 75,
-                behavior: 'instant'
-            });
-
-        } else if (e.target.textContent === 'ぶいすぽっ！') {
-
-            window.scrollTo({
-                top: groupTitle.item(3).offsetTop - 75,
-                behavior: 'instant'
-            });
-
-        };
+function scrollToGroup(targetValueOrText, offset = 75){
+    const index = groupOffsets.findIndex(
+        group => group.value === targetValueOrText || group.text === targetValueOrText
+    );
+    if(index !== -1){
+        window.scrollTo({ top: groupTitle.item(index).offsetTop - offset, behavior: 'instant' });
     }
+}
+
+function scrollEvent(e) {
+    const value = e.target.value || e.target.textContent;
+    const offset = e.target.className === 'pull-down-list' ? 145 : 75;
+    scrollToGroup(value, offset);
+    
 }
 
 /**
@@ -221,25 +172,6 @@ if (mainContentWrapper) {
     });
 }
 
-window.addEventListener('scroll', () => {
-
-    const scrollPosition = window.scrollY;
-
-    if (document.querySelector('.pull-down-list') !== null) {
-        if (scrollPosition > document.querySelector('.pull-down-list').offsetTop - 30) {
-
-            memberSearch.style.top = '115px';
-            memberSearch.style.margin = '0';
-            searchBox.style.boxShadow = "0 0 0 2px rgba(13, 110, 253, 0.6)";
-
-        } else {
-
-            memberSearch.style = '';
-            searchBox.style = '';
-        }
-    }
-});
-
 searchBox.addEventListener('input', () => {
     const searchTerm = searchBox.value.trim().replace(/\s+/g, '');
 
@@ -287,19 +219,11 @@ window.matchMedia(PULLDOWN_BREAKPOINT).addEventListener('change', () => {
     searchBox.style = '';
 });
 
-
-if (errorContainer) {
+//登録完了 or メンバーを選択してくださいエラー
+if (fadeOutRemoveContainer) {
     setTimeout(() => {
-        errorContainer.style.transition = 'opacity 0.5s ease-out';
-        errorContainer.style.opacity = '0';
-        setTimeout(() => { errorContainer.remove(); }, 500);
-    }, 2200);
-}
-
-if (registrationComplete) {
-    setTimeout(() => {
-        registrationComplete.style.transition = 'opacity 0.5s ease-out';
-        registrationComplete.style.opacity = '0';
-        setTimeout(() => { registrationComplete.remove(); }, 500);
+        fadeOutRemoveContainer.style.transition = 'opacity 0.5s ease-out';
+        fadeOutRemoveContainer.style.opacity = '0';
+        setTimeout(() => { fadeOutRemoveContainer.remove(); }, 500);
     }, 2200);
 }

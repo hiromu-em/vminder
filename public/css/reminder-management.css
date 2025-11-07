@@ -400,17 +400,7 @@ header a {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
-.error-message-container {
-    position: fixed;
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 15px 25px;
-    margin-top: 15px;
-    border-radius: 20px;
-    z-index: 1000;
-}
-
-.registration-complete-container {
+.fade-out-remove-container {
     position: fixed;
     background-color: #27C7FF;
     color: #fff;
@@ -420,8 +410,7 @@ header a {
     z-index: 1000;
 }
 
-.error-message-container p,
-.registration-complete-container p {
+.fade-out-remove-container p {
     margin: 0;
 }
 
