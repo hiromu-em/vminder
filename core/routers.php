@@ -120,3 +120,10 @@ $router->add(
         ))
     ]
 );
+
+$router->add(
+    'GET',
+    '/dashboard',
+    ['class' => Controller\DashboardController::class, 'method' => 'showDashboard'],
+    [new ViewRenderer()]
+);
