@@ -55,7 +55,6 @@ class UserAuthController
             }
         }
 
-        // トークンを検証していない場合、top画面へリダイレクト
         $this->response->redirect('/', 301);
     }
 
@@ -66,7 +65,6 @@ class UserAuthController
      */
     public function handleTokenVerification(UserRegisterService $registerService): never
     {
-        // SESSIONに存在しない場合はTOP画面にリダイレクト
         if (!$this->session->has('token')) {
             $this->response->redirect('/', 301);
         }
@@ -147,7 +145,6 @@ class UserAuthController
             $userRecord = $registerService->executeRegisterNewUser($email, $hashPassword);
 
         } catch (DatabaseException $e) {
-            http_response_code(500);
             $viewRenderer->render('systemError');
         }
 
@@ -155,7 +152,7 @@ class UserAuthController
         $this->session->clear();
         $this->session->setStr('user_id', $userRecord['id']);
 
-        $this->response->redirect('/init-profile-setting');
+        $this->response->redirect('/dashboard');
     }
 
     /**
