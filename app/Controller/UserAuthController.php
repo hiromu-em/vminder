@@ -181,7 +181,6 @@ class UserAuthController
             $executeUserLoginResult = $loginService->executeUserLogin($email, $plainPassword);
 
         } catch (DatabaseException $e) {
-            http_response_code(500);
             $viewRenderer->render('systemError');
         }
 
@@ -192,6 +191,5 @@ class UserAuthController
 
         $userId = $executeUserLoginResult->value();
         $this->session->setStr('user_id', $userId);
-
     }
 }
