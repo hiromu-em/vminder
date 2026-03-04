@@ -51,7 +51,7 @@ class OauthController
         $tokenData = $client->verifyIdToken();
         $userAccount = $googleUserSyncService->synchronizeUserData($tokenData['sub'], $tokenData['email']);
 
-        $this->session->setArray('user_info', $userAccount->getUserRecord());
+        $this->session->setStr('user_id', $userAccount->getUserId());
 
         $this->response->redirect('/dashboard', 301);
     }

@@ -14,13 +14,8 @@ final class User
     ) {
     }
 
-    public function getUserRecord(): array
+    public function getUserId(): string
     {
-        return [
-            'user_id' => $this->userId,
-            'email' => $this->email,
-            'provider_id' => $this->providerId,
-            'provider_name' => $this->providerName
-        ];
+        return $this->userId;
     }
 }
