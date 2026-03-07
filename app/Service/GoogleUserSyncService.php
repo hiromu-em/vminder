@@ -13,6 +13,9 @@ class GoogleUserSyncService
     {
     }
 
+    /**
+     * ユーザーデータをDBのレコードと同期する
+     */
     public function synchronizeUserData(string $providerId, string $email): User
     {
         if ($this->authRepository->providerIdExists($providerId)) {

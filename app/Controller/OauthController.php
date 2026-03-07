@@ -49,6 +49,8 @@ class OauthController
         }
 
         $tokenData = $client->verifyIdToken();
+
+        // DBのレコードとtokenDataを同期させてユーザーアカウントを取得する
         $userAccount = $googleUserSyncService->synchronizeUserData($tokenData['sub'], $tokenData['email']);
 
         $this->session->setStr('user_id', $userAccount->getUserId());
