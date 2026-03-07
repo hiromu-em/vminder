@@ -27,7 +27,7 @@ class UserAuthRepository
     /**
      * プロパイダ―IDからユーザーレコードを取得する
      */
-    public function findUserRecordByProviderId($providerId)
+    public function findUserRecordByProviderId($providerId): array
     {
         $statement = $this->pdo->prepare(
             "SELECT * FROM users_vmatch LEFT JOIN users_vmatch_providers USING(id) WHERE provider_id = ?"
