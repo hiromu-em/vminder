@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Vmatch\Oauth;
+namespace Vmatch;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
