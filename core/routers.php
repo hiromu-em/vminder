@@ -12,6 +12,7 @@ use Service\GoogleUserSyncService;
 use Repository\UserAuthRepository;
 use Vmatch\FormValidation;
 use Vmatch\GoogleOauth;
+use Vmatch\TwitterOauth;
 
 use Google\Client;
 
@@ -111,6 +112,20 @@ $router->add(
         new GoogleOauth(new Client(
             ['client_id' => $_ENV['CLIENTID'], 'client_secret' => $_ENV['CLIENTSECRET']]
         ))
+    ]
+);
+
+$router->add(
+    'GET',
+    '/twitter-oauth',
+    ['class' => Controller\OauthController::class, 'method' => 'handleTwitterOauth'],
+    [
+        new TwitterOauth(
+            new Abraham\TwitterOAuth\TwitterOAuth(
+                $_ENV['TWITTER_API_KEY'],
+                $_ENV['TWITTER_API_KEY_SECRET']
+            )
+        )
     ]
 );
 

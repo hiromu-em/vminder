@@ -8,6 +8,7 @@ use Core\Response;
 use Core\Session;
 use Core\ViewRenderer;
 use Vmatch\GoogleOauth;
+use Vmatch\TwitterOauth;
 use Service\GoogleUserSyncService;
 
 class OauthController
@@ -88,5 +89,10 @@ class OauthController
         $this->session->setArray('google_access_token', $accessToken);
 
         $this->response->redirect('/google-oauth', 301);
+    }
+
+    public function handleTwitterOauth(TwitterOauth $twitterOauth)
+    {
+        
     }
 }
