@@ -117,20 +117,6 @@ $router->add(
 
 $router->add(
     'GET',
-    '/twitter-oauth',
-    ['class' => Controller\OauthController::class, 'method' => 'handleTwitterOauth'],
-    [
-        new TwitterOauth(
-            new Abraham\TwitterOAuth\TwitterOAuth(
-                $_ENV['TWITTER_API_KEY'],
-                $_ENV['TWITTER_API_KEY_SECRET']
-            )
-        )
-    ]
-);
-
-$router->add(
-    'GET',
     '/dashboard',
     ['class' => Controller\DashboardController::class, 'method' => 'showDashboard'],
     [new ViewRenderer()]
