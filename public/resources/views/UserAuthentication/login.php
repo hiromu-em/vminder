@@ -72,21 +72,6 @@
                     </div>
                 </button>
             </form>
-            <form action="/twitter-oauth" method="get">
-                <button class="login-gsi-material-button login-x-material-button" type="submit">
-                    <div class="login-gsi-material-button-state"></div>
-                    <div class="login-gsi-material-button-content-wrapper">
-                        <div class="login-gsi-material-button-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" aria-hidden="true">
-                                <path
-                                    d="M20.285 7.715a1 1 0 0 0-1.414-1.414L12 13.172 5.129 6.301A1 1 0 1 0 3.715 7.715L10.586 14.586 3.715 21.457a1 1 0 0 0 1.414 1.414L12 15.999l6.871 6.872a1 1 0 0 0 1.414-1.414L13.414 14.586l6.871-6.871z" />
-                            </svg>
-                        </div>
-                        <span class="login-gsi-material-button-contents">Sign in with X</span>
-                    </div>
-                </button>
-            </form>
         </div>
         <div class="login-auth-link">
             <p>アカウントをお持ちでない方は<a href="/register">新規登録</a></p>
