@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Vmatch;
+namespace Vminder;
 
 use Google\Client;
 
