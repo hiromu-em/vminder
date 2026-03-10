@@ -7,7 +7,7 @@ use Core\Request;
 use Core\Response;
 use Core\Session;
 use Core\ViewRenderer;
-use Vmatch\GoogleOauth;
+use Vminder\GoogleOauth;
 use Service\GoogleUserSyncService;
 
 class OauthController

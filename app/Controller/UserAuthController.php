@@ -9,8 +9,8 @@ use Core\ViewRenderer;
 use Core\Session;
 use Service\UserRegisterService;
 use Service\UserLoginService;
-use Vmatch\FormValidation;
-use Vmatch\Exception\DatabaseException;
+use Vminder\FormValidation;
+use Vminder\Exception\DatabaseException;
 
 class UserAuthController
 {

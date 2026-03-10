@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Service;
 
 use Repository\UserAuthRepository;
-use Vmatch\Result;
-use Vmatch\Exception\DatabaseException;
+use Vminder\Result;
+use Vminder\Exception\DatabaseException;
 
 class UserRegisterService
 {

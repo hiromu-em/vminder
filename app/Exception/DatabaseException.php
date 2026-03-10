@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Vmatch\Exception;
+namespace Vminder\Exception;
 
 class DatabaseException extends \Exception
 {
