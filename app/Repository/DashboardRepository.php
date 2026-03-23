@@ -5,5 +5,7 @@ namespace Repository;
 
 class DashboardRepository
 {
-
+    public function __construct(private \PDO $pdo)
+    {
+    }
 }

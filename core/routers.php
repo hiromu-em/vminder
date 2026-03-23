@@ -6,9 +6,11 @@ use Core\Request;
 use Core\Response;
 use Core\ViewRenderer;
 use Core\Session;
+use Repository\DashboardRepository;
 use Service\UserRegisterService;
 use Service\UserLoginService;
 use Service\GoogleUserSyncService;
+use Service\DashboardService;
 use Repository\UserAuthRepository;
 use Vminder\FormValidation;
 use Vminder\GoogleOauth;
@@ -118,5 +120,8 @@ $router->add(
     'GET',
     '/dashboard',
     ['class' => Controller\DashboardController::class, 'method' => 'showDashboard'],
-    [new ViewRenderer()]
+    [
+        new ViewRenderer(),
+        new DashboardService(new DashboardRepository(generatePdo()))
+    ]
 );
