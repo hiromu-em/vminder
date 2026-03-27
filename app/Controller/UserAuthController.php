@@ -70,7 +70,7 @@ class UserAuthController
         }
 
         $verificationTokenResult = $registerService->validateCertificationToken(
-            $this->request->fetchInputStr('token'),
+            $this->request->fetchInputValue('token'),
             $this->session->getStr('token')
         );
 
@@ -95,7 +95,7 @@ class UserAuthController
         FormValidation $formValidation
     ): never {
 
-        $email = $this->request->fetchInputStr('email');
+        $email = $this->request->fetchInputValue('email');
         $emailFormatResult = $formValidation->validateEmailFormat($email);
 
         if (!$emailFormatResult->isSuccess()) {
@@ -129,7 +129,7 @@ class UserAuthController
         ViewRenderer $viewRenderer
     ): never {
 
-        $plainPassword = $this->request->fetchInputStr('password');
+        $plainPassword = $this->request->fetchInputValue('password');
         $email = $this->session->getStr('email');
 
         $passwordFormatResult = $formValidation->validatePasswordFormat($plainPassword);
@@ -163,8 +163,8 @@ class UserAuthController
         UserLoginService $loginService,
         ViewRenderer $viewRenderer
     ): void {
-        $email = $this->request->fetchInputStr('email');
-        $plainPassword = $this->request->fetchInputStr('password');
+        $email = $this->request->fetchInputValue('email');
+        $plainPassword = $this->request->fetchInputValue('password');
 
         $emailFormatResult = $formValidation->validateEmailFormat($email);
         $passwordFormatResult = $formValidation->validatePasswordFormat($plainPassword);
