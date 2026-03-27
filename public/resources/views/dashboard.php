@@ -24,19 +24,19 @@
             <input type="search" id="member-search-box" placeholder="メンバー検索" autocomplete="off">
         </div>
         <div class="reminder-select-list">
-
-            <?php foreach ($vtuberChannels as $vtuberChannel): ?>
-                <form action="/reminder-register" method="post" id="reminder-select-checkbox">
+            <form action="/reminder-register" method="post" id="reminder-select-checkbox">
+                <?php foreach ($vtuberChannels as $vtuberChannelId => $vtuberRecord): ?>
                     <div class="reminder-card-section">
-                        <img src="<?= htmlspecialchars($vtuberChannel['thumbnail_url']) ?>"
-                            alt="<?= htmlspecialchars($vtuberChannel['name']) ?>">
-                        <p class="vtuber-name-content"><?= htmlspecialchars($vtuberChannel['name']) ?></p>
-                        <input type="checkbox" name="selected_members[]"
-                            value="<?= htmlspecialchars($vtuberChannel['channel_id']) ?>">
+                        <img src="<?= htmlspecialchars($vtuberRecord['thumbnail_url']) ?>"
+                            alt="<?= htmlspecialchars($vtuberRecord['name']) ?>">
+                        <p class="vtuber-name-content"><?= htmlspecialchars($vtuberRecord['name']) ?></p>
+                        <input type="checkbox" name="selected_members[]" value="<?= htmlspecialchars($vtuberChannelId) ?>">
                     </div>
-                </form>
-            <?php endforeach ?>
-
+                <?php endforeach ?>
+            </form>
+        </div>
+        <div class="reminder-register-button">
+            <button type="submit" form="reminder-select-checkbox"></button>
         </div>
     </main>
 
