@@ -27,4 +27,17 @@ class DashboardRepository
 
         return $statement->fetchAll(\PDO::FETCH_COLUMN);
     }
+
+    /**
+     * ユーザーIDとChannelIDを紐付けたレコードをNotificationListに追加する
+     * @param array $channelIds 登録するChannelIdの配列
+     * @param array $newReminderRecords ユーザーIDとChannelIDを紐付けたレコードの配列
+     */
+    public function insertNotificationList(array $channelIds, array $newReminderRecords): void
+    {
+        $placeholders = implode(',', array_fill(0, \count($channelIds), '(?, ?)'));
+        $statement = $this->pdo->prepare("INSERT INTO users_notification_list (id, channel_id) VALUES {$placeholders}");
+
+        $statement->execute(array_merge(...$newReminderRecords));
+    }
 }
