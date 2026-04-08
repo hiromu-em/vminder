@@ -24,14 +24,20 @@ class DashboardController
      */
     public function showDashboard(ViewRenderer $viewRenderer, DashboardService $dashboardService): never
     {
-        if (!$this->session->has('vtuber_channelList')) {
+        $userID = $this->session->getStr('user_id');
 
-            // DBから全てのvtuberデータを取得してSessionに保存する
-            $this->session->setArray('vtuber_channelList', $dashboardService->getAllVtuberData());
+        if (!$this->session->has('vtuber_channels') && !$this->session->has('registered_channelIds')) {
+
+            $this->session->setArray('vtuber_channels', $dashboardService->getAllVtuberData());
+
+            // リマインダー登録しているチャンネルIDをDBから取得してセッションに保存する
+            $this->session->setArray('registered_channelIds', $dashboardService->getRegisteredChannelIds($userID));
         }
 
-        $vtuberChannelList['vtuberChannels'] = $this->session->getArray('vtuber_channelList');
-        $viewRenderer->render('dashboard', $vtuberChannelList);
+        $registeredChannelIds["registeredChannels"] = $this->session->getArray('registered_channelIds');
+        $vtuberChannelList['vtuberAllChannels'] = $this->session->getArray('vtuber_channels');
+
+        $viewRenderer->render('dashboard', array_merge($vtuberChannelList, $registeredChannelIds));
     }
 
     /**

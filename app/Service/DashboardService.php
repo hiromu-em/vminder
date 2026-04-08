@@ -17,6 +17,14 @@ class DashboardService
     }
 
     /**
+     * ユーザーがリマインダ―登録したchannelIdを取得する
+     */
+    public function getRegisteredChannelIds(string $userId): array
+    {
+        return $this->dashboardRepository->fetchRegisteredChannelIds($userId);
+    }
+
+    /**
      * ユーザーが選択したchannelIdとユーザーがリマインダ―登録しているchannelIdを比較する<br>
      * 未登録のChannelIdが含まれていれば、該当するChannelIdを返す
      * @return array 未登録のChannelId
