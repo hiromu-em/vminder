@@ -35,8 +35,9 @@ class DashboardController
     }
 
     /**
+     * ユーザーIDと選択したchannelIDを紐付ける<br>
      * 選択したchannelIDがユーザーと紐付くchannelIDと重複しているか比較する<br>
-     * 重複していない場合、ユーザーIDと選択したchannelIDを紐付ける
+     * 重複していない場合、ユーザーIDとchannelIDを紐付ける
      */
     public function assignChannelIdToUser(DashboardService $dashboardService)
     {
