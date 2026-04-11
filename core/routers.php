@@ -9,7 +9,7 @@ use Core\Session;
 use Repository\DashboardRepository;
 use Service\UserRegisterService;
 use Service\UserLoginService;
-use Service\GoogleUserSyncService;
+use Service\GoogleUserService;
 use Service\DashboardService;
 use Repository\UserAuthRepository;
 use Vminder\FormValidation;
@@ -101,7 +101,7 @@ $router->add(
         new GoogleOauth(new Client()),
         ['client_id' => $_ENV['CLIENTID'], 'client_secret' => $_ENV['CLIENTSECRET']],
         new ViewRenderer('views/Error/'),
-        new GoogleUserSyncService(new UserAuthRepository(generatePdo()))
+        new GoogleUserService(new UserAuthRepository(generatePdo()))
     ]
 );
 

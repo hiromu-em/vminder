@@ -6,7 +6,7 @@ namespace Service;
 use Repository\UserAuthRepository;
 use Entity\User;
 
-class GoogleUserSyncService
+class GoogleUserService
 {
 
     public function __construct(private UserAuthRepository $authRepository)

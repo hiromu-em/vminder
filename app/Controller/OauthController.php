@@ -8,7 +8,7 @@ use Core\Response;
 use Core\Session;
 use Core\ViewRenderer;
 use Vminder\GoogleOauth;
-use Service\GoogleUserSyncService;
+use Service\GoogleUserService;
 
 class OauthController
 {
@@ -19,14 +19,12 @@ class OauthController
     ) {
 
     }
-    /**
-     * @param array $clientConfig クライアントIDとクライアントシークレットを含めた配列
-     */
+
     public function handleGoogleOauth(
         GoogleOauth $googleOauth,
         array $clientConfig,
         ViewRenderer $viewRenderer,
-        GoogleUserSyncService $googleUserSyncService
+        GoogleUserService $googleUserSyncService
     ) {
         $client = $googleOauth->changeClientSetting($clientConfig);
 
