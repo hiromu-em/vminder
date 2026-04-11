@@ -25,7 +25,7 @@
         </div>
         <div class="reminder-select-list">
             <form action="/reminder-register" method="post" id="reminder-select-checkbox">
-                <?php foreach ($vtuberChannels as $vtuberChannelId => $vtuberRecord): ?>
+                <?php foreach ($vtuberAllChannels as $vtuberChannelId => $vtuberRecord): ?>
                     <div class="reminder-card-section">
                         <img src="<?= htmlspecialchars($vtuberRecord['thumbnail_url']) ?>"
                             alt="<?= htmlspecialchars($vtuberRecord['name']) ?>">
