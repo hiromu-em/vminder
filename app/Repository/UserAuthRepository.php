@@ -83,9 +83,15 @@ class UserAuthRepository
     /**
      * プロバイダーIDとユーザーIDを紐付ける
      */
-    public function linkProviderUserId(string $userId, string $providerId, string $providerName): void
-    {
-        $statement = $this->pdo->prepare("INSERT INTO users_provider(id, provider_name, provider_id) VALUES (?, ?, ?)");
-        $statement->execute([$userId, $providerName, $providerId]);
+    public function linkProviderUserId(
+        string $userId,
+        string $providerId,
+        string $providerName,
+        string $refreshToken
+    ): void {
+        $statement = $this->pdo->prepare("
+        INSERT INTO users_provider(id, provider_name, provider_id, refresh_token) VALUES (?, ?, ?, ?)");
+
+        $statement->execute([$userId, $providerName, $providerId, $refreshToken]);
     }
 }

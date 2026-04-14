@@ -16,8 +16,11 @@ class GoogleUserService
     /**
      * ユーザーデータをDBのレコードと同期する
      */
-    public function synchronizeUserData(string $providerId, string $email): User
-    {
+    public function synchronizeUserData(
+        string $providerId,
+        string $email,
+        ?string $refreshToken = null
+    ): User {
         if ($this->authRepository->providerIdExists($providerId)) {
 
             $userRecord = $this->authRepository->findUserRecordByProviderId($providerId);
@@ -27,20 +30,21 @@ class GoogleUserService
                 email: $userRecord['email'],
                 isNewUser: false,
                 providerId: $providerId,
-                providerName: 'Google'
+                providerName: 'Google',
+                refreshToken: $refreshToken
             );
         }
 
         $userRecord = $this->authRepository->fetchNewUserRecord($email);
-        $this->authRepository->linkProviderUserId($userRecord['id'], $providerId, 'Google');
+        $this->authRepository->linkProviderUserId($userRecord['id'], $providerId, 'Google', $refreshToken);
 
         return new User(
             userId: $userRecord['id'],
             email: $userRecord['email'],
             isNewUser: true,
             providerId: $providerId,
-            providerName: 'Google'
+            providerName: 'Google',
+            refreshToken: $refreshToken
         );
     }
-
 }

@@ -24,7 +24,7 @@ class OauthController
         GoogleOauth $googleOauth,
         array $clientConfig,
         ViewRenderer $viewRenderer,
-        GoogleUserService $googleUserSyncService
+        GoogleUserService $googleUserService
     ) {
         $client = $googleOauth->changeClientSetting($clientConfig);
 
@@ -49,15 +49,20 @@ class OauthController
         $tokenData = $client->verifyIdToken();
 
         // DBのレコードとtokenDataを同期させてユーザーアカウントを取得する
-        $userAccount = $googleUserSyncService->synchronizeUserData($tokenData['sub'], $tokenData['email']);
+        $userAccount = $googleUserService->synchronizeUserData(
+            $tokenData['sub'],
+            $tokenData['email'],
+            $googleAccessToken['refresh_token'] ?? null
+        );
 
         $this->session->setStr('user_id', $userAccount->getUserId());
 
         $this->response->redirect('/dashboard', 301);
     }
 
-    public function handleGoogleOauthCode(GoogleOauth $googleOauth): never
-    {
+    public function handleGoogleOauthCode(
+        GoogleOauth $googleOauth
+    ): never {
         if ($this->request->isGet('error')) {
             $this->response->redirect('/', 301);
         }
@@ -73,11 +78,10 @@ class OauthController
                 $this->response->redirect('/', 301);
             }
 
-            $riedirectUri = $googleOauth->getRedirectUri();
-
             $client = $googleOauth->getGoogleClient();
-            $client->setRedirectUri($riedirectUri);
 
+            $riedirectUri = $googleOauth->getRedirectUri();
+            $client->setRedirectUri($riedirectUri);
             $accessToken = $googleOauth->fetchAccessToken($code, $googleCodeVerifier);
 
             $this->session->clear();
