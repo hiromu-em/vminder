@@ -11,7 +11,7 @@ final class User
         private bool $isNewUser,
         private ?string $providerId,
         private ?string $providerName,
-        private ?string $refreshToken
+        private ?string $refreshToken = null
     ) {
     }
 

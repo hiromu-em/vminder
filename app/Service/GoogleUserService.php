@@ -16,10 +16,8 @@ class GoogleUserService
     /**
      * プロパイダ―IDを基にしてDBからユーザーレコードを取得する
      */
-    public function fetchProviderId(
-        string $providerId,
-        ?string $refreshToken = null
-    ): User {
+    public function fetchProviderId(string $providerId): User
+    {
 
         $userRecord = $this->authRepository->findUserRecordByProviderId($providerId);
 
@@ -28,8 +26,7 @@ class GoogleUserService
             email: $userRecord['email'],
             isNewUser: false,
             providerId: $providerId,
-            providerName: 'Google',
-            refreshToken: $refreshToken
+            providerName: 'Google'
         );
     }
 

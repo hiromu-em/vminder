@@ -51,10 +51,7 @@ class OauthController
         // プロパイダ―IDがDBのレコードに存在するか確認する
         if ($googleUserService->providerRecordExists($tokenData['sub'])) {
 
-            $userAccount = $googleUserService->fetchProviderId(
-                $tokenData['sub'],
-                $googleAccessToken['refresh_token'] ?? null
-            );
+            $userAccount = $googleUserService->fetchProviderId($tokenData['sub']);
         }
 
         $this->session->setStr('user_id', $userAccount->getUserId());
