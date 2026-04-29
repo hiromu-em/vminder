@@ -25,7 +25,8 @@ class UserAuthRepository
     }
 
     /**
-     * プロパイダ―IDからユーザーレコードを取得する
+     * プロパイダ―IDからユーザーレコードを取得する<br>
+     * usersテーブルとusers_providerテーブルを結合してプロバイダーIDに紐づくユーザーレコードを取得する
      */
     public function findUserRecordByProviderId($providerId): array
     {
@@ -58,12 +59,24 @@ class UserAuthRepository
     public function fetchNewUserRecord($email, $passwordHash = null): array
     {
         $stetement = $this->pdo->prepare(
-            "INSERT INTO users(email, password_hash) VALUES (?, ?) RETURNING *"
+            "SELECT * FROM users WHERE email = ? AND password_hash = ?"
         );
         $stetement->execute([$email, $passwordHash]);
         $userRecord = $stetement->fetch();
 
         return $userRecord;
+    }
+
+    /**
+     * 新規ユーザーレコードをDBに保存する
+     */
+    public function insertNewUserRecord($email, $passwordHash = null)
+    {
+        $stetement = $this->pdo->prepare(
+            "INSERT INTO users(email, password_hash) VALUES (?, ?)"
+        );
+        $stetement->execute([$email, $passwordHash]);
+        
     }
 
     /**
