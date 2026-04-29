@@ -21,7 +21,9 @@ class UserRegisterService
     public function executeRegisterNewUser($email, $hashPassword): array
     {
         try {
+            $this->authRepository->insertNewUserRecord($email, $hashPassword);
             return $this->authRepository->fetchNewUserRecord($email, $hashPassword);
+            
         } catch (\PDOException $e) {
             throw new DatabaseException();
         }
