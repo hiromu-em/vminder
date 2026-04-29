@@ -18,11 +18,10 @@ class UserRegisterService
      * 登録が正常に完了した場合、ユーザーレコードを返す。
      * @throws DatabaseException
      */
-    public function executeRegisterNewUser($email, $hashPassword): array
+    public function executeRegisterNewUser($email, $hashPassword): string
     {
         try {
-            $this->authRepository->insertNewUserRecord($email, $hashPassword);
-            return $this->authRepository->fetchNewUserRecord($email, $hashPassword);
+            return $this->authRepository->fetchNewUserId($email, $hashPassword);
             
         } catch (\PDOException $e) {
             throw new DatabaseException();
